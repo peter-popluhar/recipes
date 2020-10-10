@@ -1,41 +1,35 @@
-<style>
-  h1,
-  figure,
-  p {
-    text-align: center;
-    margin: 0 auto;
-  }
+<script context="module">
+  import Prismic from "prismic-javascript";
+  import PrismicDOM from "prismic-dom";
+  import { Client, linkResolver } from "../../prismic-config.js";
 
-  h1 {
-    font-size: 2.8em;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin: 0 0 0.5em 0;
-  }
+  let cards = null;
 
-  figure {
-    margin: 0 0 1em 0;
-  }
+  export async function preload({ params, query }) {
+    const postResponse = await Client.query(
+      Prismic.Predicates.at("document.type", "card")
+    );
 
-  img {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 0 1em 0;
-  }
+    cards = postResponse.results;
 
-  p {
-    margin: 1em auto;
-  }
-
-  @media (min-width: 480px) {
-    h1 {
-      font-size: 4em;
+    if (cards) {
+      return { cards };
+    } else {
+      this.error(res.status, data.message);
     }
   }
-</style>
+</script>
 
-<svelte:head>
-  <title>Sapper project template</title>
-</svelte:head>
+<script>
+  import Card from "./../components/Card.svelte";
 
-<h1>Coming soon</h1>
+  export let cards;
+</script>
+
+<ul>
+  {#each cards as card, i}
+  <li>
+    <Card card={card} />
+  </li>
+  {/each}
+</ul>

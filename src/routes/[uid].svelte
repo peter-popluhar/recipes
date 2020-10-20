@@ -25,6 +25,6 @@
 
 <p>{PrismicDOM.RichText.asText(title)}</p>
 Originall Source: <a href="{source.url}" target="_blank">here</a>
-<img src="{image.url}" alt="">
+<img src="{image.url}" alt="test">
 <p>Ingredients:</p>
 

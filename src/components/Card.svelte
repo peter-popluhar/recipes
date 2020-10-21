@@ -1,7 +1,7 @@
-<script lang="ts">
+<script>
   import { Client, linkResolver } from "../../prismic-config.js";
   import PrismicDOM from "prismic-dom";
-  export let card: any;
+  export let card;
 
   const { title, category } = card.data;
 </script>

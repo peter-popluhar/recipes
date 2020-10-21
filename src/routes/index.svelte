@@ -1,7 +1,6 @@
 <script context="module">
   import Prismic from "prismic-javascript";
-  import PrismicDOM from "prismic-dom";
-  import { Client, linkResolver } from "../../prismic-config.js";
+  import { Client } from "../../prismic-config.js";
 
   let cards = null;
 
@@ -22,6 +21,7 @@
 
 <script>
   import Card from "./../components/Card.svelte";
+  import Search from "./../components/Search.svelte";
 
   export let cards;
 </script>
@@ -33,3 +33,5 @@
   </li>
   {/each}
 </ul>
+
+<Search data={cards} let:filtered />

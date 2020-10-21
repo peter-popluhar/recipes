@@ -22,8 +22,11 @@
 <script>
   import Card from "./../components/Card.svelte";
   import Search from "./../components/Search.svelte";
+  import {itemsArray} from './../stores'
 
   export let cards;
+
+  $itemsArray = [...cards]
 </script>
 
 <ul>
@@ -34,4 +37,4 @@
   {/each}
 </ul>
 
-<Search data={cards} let:filtered />
+<Search /> 

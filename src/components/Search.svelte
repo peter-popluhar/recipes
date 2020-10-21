@@ -1,14 +1,16 @@
 <script>
 	import PrismicDOM from "prismic-dom";
-	export let data = [];
+	import {itemsArray} from './../stores'
+	
 	export let filtered;
 
 	let input = undefined;
 	let value = ""
 
-	$: filtered = data.filter(item =>
+	$: filtered = $itemsArray.filter(item =>
 			item.data.title[0].text.toLowerCase().includes(value.toLowerCase())
 	);
+
 
 
 </script>
@@ -18,7 +20,7 @@
 <ul>
 	{#each filtered as item}
 		<li>
-			<a rel="prefetch" href="{item.uid}">
+			<a href={`/${item.uid}`}>
 				{PrismicDOM.RichText.asText(item.data.title)}
 			</a>
 		</li>

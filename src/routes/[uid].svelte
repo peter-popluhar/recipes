@@ -21,6 +21,7 @@
   export let card;
   export let ingredientsSlices = [];
   export let instructions = [];
+  import Search from "./../components/Search.svelte";
 
   const {image, title, source, category, body } = card.data;
 
@@ -35,7 +36,7 @@
   // console.log(instructions)
   
 </script>
-
+<Search /> 
 <p>{PrismicDOM.RichText.asText(title)}</p>
 <p>in category:{category}</p>
 <p> Originall Source: <a href="{source.url}" target="_blank">here</a></p>

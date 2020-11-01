@@ -1,0 +1,15 @@
+@import "./../../style/media-queries.scss";
+
+ul {
+  display: grid;
+  row-gap: 16px;
+
+  @include md {
+    row-gap: 32px;
+  }
+
+  @include lg {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 32px;
+  }
+}

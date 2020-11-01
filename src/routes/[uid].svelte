@@ -14,57 +14,48 @@
       this.error(res.status, data.message);
     }
   }
+
 </script>
 
 <script>
+  const Elements = PrismicDOM.RichText.Elements;
 
   export let card;
-  export let ingredientsSlices = [];
-  export let instructions = [];
-  import Search from "./../components/Search.svelte";
 
-  const {image, title, source, category, body } = card.data;
+  	
+var htmlSerializer = function (type, element, content, children) {
+  switch(type) {
+ 
+    // Add a class to paragraph elements
+    case Elements.listItem: 
+      return '<li class="paragraph-class">' + children.join('') + '</li>';
+ 
+    // Return null to stick with the default behavior
+    default: 
+      return null;
+  }
+};
 
-  body.map(item => {
-    switch (item.slice_type) {
-      case 'ingredients': ingredientsSlices.push(item)
-        break;
-      case 'instructions': instructions.push(item)
-    }
-  })
-
-  // console.log(instructions)
+  const {image, title, source, category, instructions, ingredientes } = card.data
   
 </script>
-<Search /> 
-<p>{PrismicDOM.RichText.asText(title)}</p>
+
+<style>
+  :global(.paragraph-class) {color: red}
+</style>
+
+
+<h1>{PrismicDOM.RichText.asText(title)}</h1>
 <p>in category:{category}</p>
 <p> Originall Source: <a href="{source.url}" target="_blank">here</a></p>
+
+<h2>Ingredients:</h2>
+{@html PrismicDOM.RichText.asHtml(ingredientes)}
+
+
+<h2>Instructions:</h2>
+{@html PrismicDOM.RichText.asHtml(instructions, linkResolver, htmlSerializer)}
+
+
 <img src="{image.url}" alt="test">
 
-<p>Ingredients:</p>
-<ul>
-  {#each ingredientsSlices as slice}
-  <li>
-    {PrismicDOM.RichText.asText(slice.primary.title1)}
-    <ul>
-      {#each slice.primary.items as {text}}
-        <li>
-          {text}
-        </li>
-      {/each}
-    </ul>
-  </li>
-  {/each}
-</ul>
-
-<p>instructions:</p>
-<ul>
-  {#each instructions as instruction}
-      {#each instruction.primary.instructions as {text}}
-        <li>
-          {text}
-        </li>
-      {/each}
-  {/each}
-</ul>

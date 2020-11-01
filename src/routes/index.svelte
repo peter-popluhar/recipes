@@ -20,6 +20,7 @@
 </script>
 
 <script>
+<<<<<<< HEAD
   import MediaBox from './../components/media-box/media-box.svelte'
   export let items;
 </script>
@@ -37,3 +38,20 @@
     {/each}
   </ul>
 </div>
+=======
+  import Card from "./../components/Card.svelte";
+  import Search from "./../components/Search.svelte";
+
+  export let cards;
+</script>
+
+<ul>
+  {#each cards as card, i}
+  <li>
+    <Card card={card} />
+  </li>
+  {/each}
+</ul>
+
+<Search data={cards} let:filtered />
+>>>>>>> main

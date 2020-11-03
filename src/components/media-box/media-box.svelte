@@ -5,6 +5,7 @@
 <script>
     import { Client, linkResolver } from "../../../prismic-config.js";
     import PrismicDOM from "prismic-dom";
+    import Label from './../label/label.svelte'
     export let data;
 
     const { title, image, category } = data.data;
@@ -14,7 +15,7 @@
 <a rel="prefetch" href={linkResolver(data)}>
     <img src={image.url} alt={PrismicDOM.RichText.asText(title)} />
     <div>
-        <span class="text--xs">{category}</span>
+        <Label text={category} />
         <h3>{PrismicDOM.RichText.asText(title)}</h3>
     </div>
 </a>

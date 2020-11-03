@@ -2,14 +2,14 @@
   import PrismicDOM from "prismic-dom";
   import { Client, linkResolver } from "../../prismic-config";
 
-  let card = null;
+  let item = null;
 
   export async function preload({ params, query }) {
     const uid = params.uid;
-    card = await Client.getByUID("card", uid);
+    item = await Client.getByUID("card", uid);
 
-    if (card) {
-      return { card };
+    if (item) {
+      return { item };
     } else {
       this.error(res.status, data.message);
     }
@@ -18,44 +18,56 @@
 </script>
 
 <script>
-  const Elements = PrismicDOM.RichText.Elements;
+  import Label from "./../components/label/label.svelte";
+  import {htmlSerializer} from './../utils/html-serializer'
+  export let item;
 
-  export let card;
+  const {image, title, source, category, instructions, ingredientes } = item.data
 
-  	
-var htmlSerializer = function (type, element, content, children) {
-  switch(type) {
- 
-    // Add a class to paragraph elements
-    case Elements.listItem: 
-      return '<li class="paragraph-class">' + children.join('') + '</li>';
- 
-    // Return null to stick with the default behavior
-    default: 
-      return null;
-  }
-};
-
-  const {image, title, source, category, instructions, ingredientes } = card.data
-  
 </script>
 
-<style>
-  :global(.paragraph-class) {color: red}
+<style type="text/scss">
+  @import "./../style/media-queries.scss";
+
+  h1 {
+    margin-bottom: 24px;
+  }
+
+  h2 {
+    margin-bottom: 16px;
+  }
+
+  img {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .grid {
+    @include lg {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+
+  h1 {
+    position: relative;
+  }
+
 </style>
 
+<h1>{PrismicDOM.RichText.asText(title)} <Label text={category} ref="card" /></h1>
 
-<h1>{PrismicDOM.RichText.asText(title)}</h1>
-<p>in category:{category}</p>
-<p> Originall Source: <a href="{source.url}" target="_blank">here</a></p>
-
-<h2>Ingredients:</h2>
-{@html PrismicDOM.RichText.asHtml(ingredientes)}
-
-
-<h2>Instructions:</h2>
-{@html PrismicDOM.RichText.asHtml(instructions, linkResolver, htmlSerializer)}
-
+<div class="grid">
+  <div>
+    <h2>Ingredients:</h2>
+    {@html PrismicDOM.RichText.asHtml(ingredientes,linkResolver, htmlSerializer)}
+  </div>
+  <div>
+    <h2>Instructions:</h2>
+    {@html PrismicDOM.RichText.asHtml(instructions, linkResolver, htmlSerializer)}
+  </div>
+</div>
 
 <img src="{image.url}" alt="test">
-
+<p> Original Source: <a href="{source.url}" target="_blank">here</a></p>

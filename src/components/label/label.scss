@@ -1,0 +1,25 @@
+@import "./../../style/media-queries.scss";
+
+span {
+  background-color: #fff;
+  padding: 2px 4px;
+  border: 1px solid var(--color-text-light);
+  color: var(--color-text-light);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-4px, -50%);
+
+  @include md {
+    padding: 4px 8px;
+    transform: translate(-8px, -50%);
+  }
+}
+
+:global([ref="card"]) {
+  transform: translate(0,-100%) !important;
+
+  @include md {
+
+  }
+}

@@ -6,10 +6,17 @@
 
 <style type="text/scss" global>
 	@import "./../style/global.scss";
+	
+	main {
+		padding-top: 96px;
+	}
+
 </style>
 
 <Nav {segment}/>
 
 <main>
-	<slot></slot>
+	<div class="container">
+		<slot></slot>
+	</div>
 </main>

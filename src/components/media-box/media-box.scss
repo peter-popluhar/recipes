@@ -36,19 +36,3 @@ div {
     padding: 0 32px;
   }
 }
-
-span {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #fff;
-  padding: 2px 4px;
-  transform: translate(-4px, -50%);
-  border: 1px solid var(--color-text-light);
-  color: var(--color-text-light);
-
-  @include md {
-    padding: 4px 8px;
-    transform: translate(-8px, -50%);
-  }
-}

@@ -28,12 +28,12 @@
   @import './../components/article-list/article-list.scss';
 </style>
 
-<div class="container">
-  <ul>
-    {#each items as item, i}
-    <li>
-      <MediaBox data={item} />
-    </li>
-    {/each}
-  </ul>
-</div>
+
+<ul>
+  {#each items as item, i}
+  <li>
+    <MediaBox data={item} />
+  </li>
+  {/each}
+</ul>
+

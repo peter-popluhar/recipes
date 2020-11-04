@@ -1,5 +1,6 @@
 <script>
 	export let segment;
+	export let links;
 </script>
 
 <style type="text/scss">
@@ -46,5 +47,13 @@
 <nav>
 	<ul>
 		<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a></li>
+
+		{#each links as link}
+			<li>
+				<a target="_self" aria-current="{segment === `/${link}` ? 'page' : undefined}" href="categories/{link}">
+					{link}
+				</a>
+			</li>
+		{/each}
 	</ul>
 </nav>
